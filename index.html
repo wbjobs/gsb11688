@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVG FX Lab · 滤镜与混合模式实验室</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>SVG FX Lab</h1>
+  <div id="capBadges" class="badges"></div>
+  <div class="perf">渲染耗时 <span id="perfMs">–</span> ms
+    <span id="perfWarn" class="warn hidden">性能偏低，建议降级 Canvas</span>
+  </div>
+  <button id="modeToggle" class="btn">降级到 Canvas 渲染</button>
+</header>
+
+<main>
+  <aside id="left">
+    <section>
+      <h2>滤镜链 <small>（顺序生效）</small></h2>
+      <div class="row">
+        <select id="addFilterType"></select>
+        <button id="addFilterBtn" class="btn">＋ 添加</button>
+      </div>
+      <ul id="chainList" class="chain"></ul>
+    </section>
+    <section>
+      <h2>图层混合模式</h2>
+      <select id="layerBlend"></select>
+      <p class="hint" id="blendHint"></p>
+    </section>
+    <section>
+      <h2>源图像</h2>
+      <input type="file" id="imgUpload" accept="image/*">
+      <button id="resetScene" class="btn">恢复内置场景</button>
+    </section>
+  </aside>
+
+  <section id="stageWrap">
+    <svg id="stage" viewBox="0 0 800 600" width="800" height="600" aria-label="预览"></svg>
+    <canvas id="fallbackCanvas" class="hidden" width="800" height="600"></canvas>
+  </section>
+
+  <aside id="right">
+    <section>
+      <h2>参数 <span id="paramTitle" class="hint"></span></h2>
+      <div id="paramForm" class="params"><p class="hint">选择左侧滤镜节点以编辑参数</p></div>
+    </section>
+    <section>
+      <h2>预设</h2>
+      <div class="row">
+        <input id="presetName" placeholder="预设名称">
+        <button id="savePreset" class="btn">保存</button>
+      </div>
+      <ul id="presetList" class="presets"></ul>
+      <div class="row">
+        <button id="exportPresets" class="btn">导出 JSON</button>
+        <label class="btn file">导入 JSON<input type="file" id="importPresets" accept=".json" hidden></label>
+      </div>
+    </section>
+    <section>
+      <h2>导出</h2>
+      <button id="exportSVG" class="btn primary">导出 SVG（实时滤镜）</button>
+      <button id="exportCompat" class="btn">导出兼容 SVG（内嵌位图）</button>
+    </section>
+  </aside>
+</main>
+
+<div id="toasts"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
